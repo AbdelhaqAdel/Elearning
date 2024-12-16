@@ -6,72 +6,64 @@ import 'package:flutter_application_3/features/auth/data/data_sources/auth_remot
 import 'package:flutter_application_3/features/auth/data/models/sign_up_model.dart';
 import 'package:flutter_application_3/features/auth/domain/repositories/auth_repo.dart';
 
-
-class AuthRepository implements IAuthRepo{
-
+class AuthRepository implements IAuthRepo {
   final RemoteDataSource remoteDataSource;
-  
+
   AuthRepository({required this.remoteDataSource});
 
   @override
-  Future<Either<String,String>>signIn({
+  Future<Either<String, String>> signIn({
     required String email,
     required String password,
-  })async{
-    try{
-    final response=await remoteDataSource.signIn(email: email, password: password);
-      uid=response;
+  }) async {
+    try {
+      final response =
+          await remoteDataSource.signIn(email: email, password: password);
+      uid = response;
       print('uuuuuiiiiddddd$uid');
       return right(response);
-    }catch(e){
+    } catch (e) {
       print('errrroooorrrrr');
- 
-       return left(e.toString());
-     
+
+      return left(e.toString());
     }
   }
-  
+
   @override
- Future<Either<String, RegisterModel>> signUp({
-   required String name,
+  Future<Either<String, RegisterModel>> signUp({
+    required String name,
     required String email,
     required String password,
     required String phone,
     required String image,
-    required String bio,
-    required String cover,
-    required String nickname
-  })
-   async {
-    try{
-      final response=await remoteDataSource.register(
-        name: name, email: email, password: password, phone: phone,
-         image: image, bio: bio, cover: cover, nickname: nickname);
-         userModel=response;
-         return right(response);
-    }catch(e){
-      return left(e.toString());   
+  }) async {
+    try {
+      final response = await remoteDataSource.register(
+          name: name,
+          email: email,
+          password: password,
+          phone: phone,
+          image: image);
+      userModel = response;
+      return right(response);
+    } catch (e) {
+      return left(e.toString());
     }
   }
 
- @override
- Future<Either<String, RegisterModel>> getUserProfile({required uid}) async {
-  try{
-    // final cachedData=await localDataSource.getUserData();
-    // // print(cachedData.image);
-    // if(cachedData.image!=null){
-    //   return right(cachedData);
-    // }
-    final response = await remoteDataSource.getUserData(uid: uid);
-    userModel=response;
-    return right(response);
-  }catch(e){
-       return left(e.toString());
-     
+  @override
+  Future<Either<String, RegisterModel>> getUserProfile({required uid}) async {
+    try {
+      // final cachedData=await localDataSource.getUserData();
+      // // print(cachedData.image);
+      // if(cachedData.image!=null){
+      //   return right(cachedData);
+      // }
+      final response = await remoteDataSource.getUserData(uid: uid);
+      userModel = response;
+      return right(response);
+    } catch (e) {
+      return left(e.toString());
+    }
   }
-  }
-
-
-
-
 }
