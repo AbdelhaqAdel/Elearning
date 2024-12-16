@@ -46,15 +46,13 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  Future<void> register(
-      {required String name,
-      required String email,
-      required String password,
-      required String phone,
-      required String image,
-      required String bio,
-      required String cover,
-      required String nickname}) async {
+  Future<void> register({
+    required String name,
+    required String email,
+    required String password,
+    required String phone,
+    required String image,
+  }) async {
     emit(RegisterLoadingState());
     final response = await authRepository.signUp(
       name: name,
