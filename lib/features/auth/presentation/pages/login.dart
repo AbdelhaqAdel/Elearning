@@ -9,10 +9,10 @@ import 'package:flutter_application_3/sigunp1.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Login extends StatelessWidget {
-   final GlobalKey<FormState> signInFormKey = GlobalKey();
-   final TextEditingController emailController = TextEditingController();
-   final TextEditingController passwordController = TextEditingController();
-   Login({super.key});
+  final GlobalKey<FormState> signInFormKey = GlobalKey();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  Login({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,24 +20,24 @@ class Login extends StatelessWidget {
       create: (context) => AuthCubit(
         authRepository: getIt.get<AuthRepository>(),
       ),
-      child: BlocConsumer<AuthCubit,AuthState>(
+      child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-             if(state is LoginSuccessState){
-             ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                backgroundColor:Colors.green,
-                 content: Text("Login success"),
+          if (state is LoginSuccessState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                backgroundColor: Colors.green,
+                content: Text("Login success"),
               ),
             );
-             AuthCubit.get(context).getUserData(uid:state.uid);
-                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  );
-          }else if (state is LoginErrorState) {
+            AuthCubit.get(context).getUserData(uid: state.uid);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+            );
+          } else if (state is LoginErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-               backgroundColor: Colors.red,
+                backgroundColor: Colors.red,
                 content: Text(state.errMessage.toString()),
               ),
             );
@@ -47,7 +47,7 @@ class Login extends StatelessWidget {
           return Scaffold(
             backgroundColor: Colors.blue[200], // لون الخلفية
             body: Form(
-                key: signInFormKey,
+              key: signInFormKey,
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -120,15 +120,14 @@ class Login extends StatelessWidget {
                         const SizedBox(height: 20),
                         // تعديل زر "Sign In" لاحتواء دائرة سوداء مع سهم أبيض
                         ElevatedButton(
-                          onPressed: () async{
-                    
+                          onPressed: () async {
                             // هنا يمكنك إضافة الإجراء المطلوب عند الضغط على زر "تسجيل الدخول"
-                        
-                           if (signInFormKey.currentState!.validate()) {
-                                          await AuthCubit.get(context).login(
-                                            email: emailController.text,
-                                            password: passwordController.text);
-                                        }
+
+                            if (signInFormKey.currentState!.validate()) {
+                              await AuthCubit.get(context).login(
+                                  email: emailController.text,
+                                  password: passwordController.text);
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
@@ -173,8 +172,8 @@ class Login extends StatelessWidget {
                             ),
                             const SizedBox(width: 20),
                             IconButton(
-                              icon: const Icon(
-                                  Icons.facebook), // يمكنك استخدام أي أيقونة مناسبة
+                              icon: const Icon(Icons
+                                  .facebook), // يمكنك استخدام أي أيقونة مناسبة
                               onPressed: () {
                                 // هنا يمكنك إضافة الإجراء المطلوب عند الضغط على زر "Facebook"
                               },
@@ -188,7 +187,7 @@ class Login extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const Resgister()),
+                                  builder: (context) => Resgister()),
                             );
                           },
                           child: const Text(

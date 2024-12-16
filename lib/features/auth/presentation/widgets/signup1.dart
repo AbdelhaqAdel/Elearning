@@ -35,7 +35,8 @@ class Signup1 extends StatelessWidget {
                 // هنا يمكنك إضافة الإجراء لتسجيل الدخول باستخدام Google
               },
               icon: const Icon(Icons.mail, color: Colors.black), // أيقونة Gmail
-              label: const Text('Continue with Google', style: TextStyle(color: Colors.black)),
+              label: const Text('Continue with Google',
+                  style: TextStyle(color: Colors.black)),
               style: TextButton.styleFrom(
                 minimumSize: const Size(200, 50),
               ),
@@ -46,7 +47,8 @@ class Signup1 extends StatelessWidget {
                 // هنا يمكنك إضافة الإجراء لتسجيل الدخول باستخدام Apple
               },
               icon: const Icon(Icons.apple, color: Colors.black),
-              label: const Text('Continue with Apple', style: TextStyle(color: Colors.black)),
+              label: const Text('Continue with Apple',
+                  style: TextStyle(color: Colors.black)),
               style: TextButton.styleFrom(
                 minimumSize: const Size(200, 50),
               ),
@@ -68,15 +70,16 @@ class Signup1 extends StatelessWidget {
                 // فتح صفحة Login عند الضغط على الزر
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>  Login()),
+                  MaterialPageRoute(builder: (context) => Login()),
                 );
               },
               style: TextButton.styleFrom(
-                minimumSize: const Size(200,50),
+                minimumSize: const Size(200, 50),
                 backgroundColor: Colors.white, // لون خلفية الزر
               ),
               child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center, // جعل المحتوى في المنتصف
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // جعل المحتوى في المنتصف
                 children: [
                   Text(
                     'Sign In with Your Account',
@@ -102,13 +105,14 @@ class Signup1 extends StatelessWidget {
                 // فتح صفحة Resgister عند الضغط على الزر
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Resgister()),
+                  MaterialPageRoute(builder: (context) => Resgister()),
                 );
               },
               style: TextButton.styleFrom(
                 minimumSize: const Size(200, 50),
               ),
-              child: const Text('Don’t have an Account? SIGN UP', style: TextStyle(color: Colors.black)),
+              child: const Text('Don’t have an Account? SIGN UP',
+                  style: TextStyle(color: Colors.black)),
             ),
           ],
         ),

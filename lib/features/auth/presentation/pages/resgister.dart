@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_3/core/app_constant.dart';
 import 'package:flutter_application_3/core/utils/auth_locator.dart';
 import 'package:flutter_application_3/features/auth/data/repositories/auth_repo_impl.dart';
 import 'package:flutter_application_3/features/auth/presentation/manager/cubit/auth_cubit.dart';
@@ -8,7 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // تأكد من استيراد صفحة تسجيل الدخول
 
 class Resgister extends StatelessWidget {
-  const Resgister({super.key});
+  final GlobalKey<FormState> signUpFormKey = GlobalKey();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  Resgister({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +22,24 @@ class Resgister extends StatelessWidget {
       create: (context) => AuthCubit(
         authRepository: getIt.get<AuthRepository>(),
       ),
-      child: BlocConsumer<AuthCubit,AuthState>(
-            listener: (context,state){
-          if(state is LoginSuccessState){
-             ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                backgroundColor:Colors.green,
-                 content: Text("Login success"),
+      child: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is LoginSuccessState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                backgroundColor: Colors.green,
+                content: Text("Login success"),
               ),
             );
-             AuthCubit.get(context).getUserData(uid:state.uid);
-  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  );
-          }else if (state is LoginErrorState) {
+            AuthCubit.get(context).getUserData(uid: state.uid);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+            );
+          } else if (state is LoginErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-               backgroundColor: Colors.red,
+                backgroundColor: Colors.red,
                 content: Text(state.errMessage.toString()),
               ),
             );
@@ -43,6 +49,7 @@ class Resgister extends StatelessWidget {
           return Scaffold(
             backgroundColor: Colors.blue[200], // لون الخلفية
             body: Form(
+              key: signUpFormKey,
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -132,7 +139,15 @@ class Resgister extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            if (signUpFormKey.currentState!.validate()) {
+                              await AuthCubit.get(context).register(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  name: nameController.text,
+                                  phone: phoneController.text,
+                                  image: AppConstant.kDefaultUserImage);
+                            }
                             // هنا يمكنك إضافة الإجراء المطلوب عند الضغط على زر "تسجيل الاشتراك"
                           },
                           style: ElevatedButton.styleFrom(
