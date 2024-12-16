@@ -9,10 +9,10 @@ abstract class IAuthRepo {
   });
 
   Future<Either<String, RegisterModel>> signUp({
-    required String name,
+    required String firstName,
+    required String lastName,
     required String email,
     required String password,
-    required String phone,
     required String image,
   });
 

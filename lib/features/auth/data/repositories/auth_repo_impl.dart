@@ -31,19 +31,19 @@ class AuthRepository implements IAuthRepo {
 
   @override
   Future<Either<String, RegisterModel>> signUp({
-    required String name,
+    required String firstName,
     required String email,
+    required String lastName,
     required String password,
-    required String phone,
     required String image,
   }) async {
     try {
       final response = await remoteDataSource.register(
-          name: name,
+          firstName: firstName,
           email: email,
           password: password,
-          phone: phone,
-          image: image);
+          image: image,
+          lastName: lastName);
       userModel = response;
       return right(response);
     } catch (e) {

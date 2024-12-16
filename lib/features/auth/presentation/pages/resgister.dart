@@ -12,8 +12,11 @@ class Resgister extends StatelessWidget {
   final GlobalKey<FormState> signUpFormKey = GlobalKey();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   Resgister({super.key});
 
   @override
@@ -84,8 +87,9 @@ class Resgister extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 0), // مسافة قبل حقول الإدخال
-                        const TextField(
-                          decoration: InputDecoration(
+                        TextField(
+                          controller: firstNameController,
+                          decoration: const InputDecoration(
                             labelText: 'First Name',
                             border: OutlineInputBorder(),
                             filled: true,
@@ -93,8 +97,9 @@ class Resgister extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const TextField(
-                          decoration: InputDecoration(
+                        TextField(
+                          controller: lastNameController,
+                          decoration: const InputDecoration(
                             labelText: 'Last Name',
                             border: OutlineInputBorder(),
                             filled: true,
@@ -102,8 +107,9 @@ class Resgister extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const TextField(
-                          decoration: InputDecoration(
+                        TextField(
+                          controller: emailController,
+                          decoration: const InputDecoration(
                             labelText: 'Email',
                             border: OutlineInputBorder(),
                             filled: true,
@@ -111,9 +117,10 @@ class Resgister extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const TextField(
+                        TextField(
                           obscureText: true,
-                          decoration: InputDecoration(
+                          controller: passwordController,
+                          decoration: const InputDecoration(
                             labelText: 'Password',
                             border: OutlineInputBorder(),
                             filled: true,
@@ -121,9 +128,10 @@ class Resgister extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const TextField(
+                        TextField(
+                          controller: confirmPasswordController,
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Confirm Password',
                             border: OutlineInputBorder(),
                             filled: true,
@@ -140,13 +148,24 @@ class Resgister extends StatelessWidget {
                         const SizedBox(height: 20),
                         ElevatedButton(
                           onPressed: () async {
+                            if (passwordController.text !=
+                                confirmPasswordController.text) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Colors.red,
+                                  content: Text(
+                                      "please enter the same password in both fields"),
+                                ),
+                              );
+                              return;
+                            }
                             if (signUpFormKey.currentState!.validate()) {
                               await AuthCubit.get(context).register(
                                   email: emailController.text,
                                   password: passwordController.text,
-                                  name: nameController.text,
-                                  phone: phoneController.text,
-                                  image: AppConstant.kDefaultUserImage);
+                                  firstName: firstNameController.text,
+                                  image: AppConstant.kDefaultUserImage,
+                                  lastName: lastNameController.text);
                             }
                             // هنا يمكنك إضافة الإجراء المطلوب عند الضغط على زر "تسجيل الاشتراك"
                           },

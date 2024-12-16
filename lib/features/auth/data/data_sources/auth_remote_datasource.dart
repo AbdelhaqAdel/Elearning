@@ -8,10 +8,10 @@ import 'package:flutter_application_3/features/auth/data/models/sign_up_model.da
 abstract class IAuthDatasource {
   Future<String> signIn({required email, required password});
   Future<RegisterModel> register({
-    required String name,
+    required String firstName,
+    required String lastName,
     required String email,
     required String password,
-    required String phone,
     required String image,
   });
   Future<RegisterModel> getUserData({required String uid});
@@ -34,10 +34,10 @@ class RemoteDataSource implements IAuthDatasource {
 
   @override
   Future<RegisterModel> register({
-    required String name,
+    required String firstName,
+    required String lastName,
     required String email,
     required String password,
-    required String phone,
     required String image,
   }) async {
     RegisterModel? registerModel;
@@ -45,8 +45,12 @@ class RemoteDataSource implements IAuthDatasource {
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
       print('user id --------------${value.user?.uid}');
-      registerModel =
-          RegisterModel(name: name, email: email, uId: uid, image: image);
+      registerModel = RegisterModel(
+          firstName: firstName,
+          email: email,
+          uId: uid,
+          image: image,
+          lastName: lastName);
       print(value.user!.uid);
       uid = value.user?.uid ?? '';
       createUser(
