@@ -17,11 +17,11 @@ class RegisterModelAdapter extends TypeAdapter<RegisterModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return RegisterModel(
-      name: fields[0] as String?,
+      firstName: fields[0] as String?,
       email: fields[1] as String?,
       uId: fields[2] as String,
+      lastName: fields[3] as String?,
       image: fields[4] as String?,
-    
     );
   }
 
@@ -30,11 +30,13 @@ class RegisterModelAdapter extends TypeAdapter<RegisterModel> {
     writer
       ..writeByte(8)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.firstName)
       ..writeByte(1)
       ..write(obj.email)
       ..writeByte(2)
       ..write(obj.uId)
+      ..writeByte(2)
+      ..write(obj.lastName)
       ..writeByte(4)
       ..write(obj.image);
   }
