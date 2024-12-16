@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_3/core/app_constant.dart';
@@ -22,6 +24,7 @@ class RemoteDataSource implements IAuthDatasource {
 
   @override
   Future<String> signIn({required email, required password}) async {
+    log("email $email password $password");
     String? token;
     await user
         .signInWithEmailAndPassword(email: email, password: password)
@@ -44,14 +47,14 @@ class RemoteDataSource implements IAuthDatasource {
     await user
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
-      print('user id --------------${value.user?.uid}');
+      log('user id --------------${value.user?.uid}');
       registerModel = RegisterModel(
           firstName: firstName,
+          lastName: lastName,
           email: email,
           uId: uid,
           image: image,
-          lastName: lastName);
-      print(value.user!.uid);
+          );
       uid = value.user?.uid ?? '';
       createUser(
         uId: value.user?.uid ?? '',
@@ -63,14 +66,15 @@ class RemoteDataSource implements IAuthDatasource {
 
   void createUser(
       {required String uId, required RegisterModel registerModel}) async {
+        log('uid $uId  ---- $registerModel -- -- ${registerModel}');
     await FirebaseFirestore.instance
         .collection(AppConstant.kUsers)
         .doc(uId)
         .set(registerModel.toMap());
-    await FirebaseFirestore.instance
-        .collection(AppConstant.kUsers)
-        .doc(uId)
-        .update({'uid': uId});
+    // await FirebaseFirestore.instance
+    //     .collection(AppConstant.kUsers)
+    //     .doc(uId)
+    //     .update({'uid': uId});
   }
 
   @override

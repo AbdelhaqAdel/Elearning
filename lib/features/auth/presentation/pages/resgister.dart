@@ -27,15 +27,15 @@ class Resgister extends StatelessWidget {
       ),
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-          if (state is LoginSuccessState) {
+          if (state is RegisterSuccessState) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 backgroundColor: Colors.green,
-                content: Text("Login success"),
+                content: Text("sign up successfully"),
               ),
             );
-            AuthCubit.get(context).getUserData(uid: state.uid);
-            Navigator.push(
+            // AuthCubit.get(context).getUserData(uid: state.uid);
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const HomeScreen()),
             );

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_application_3/core/app_shared_variables.dart';
 import 'package:flutter_application_3/features/auth/data/models/sign_up_model.dart';
 import 'package:flutter_application_3/features/auth/data/repositories/auth_repo_impl.dart';
@@ -37,12 +39,16 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> login({required String email, required String password}) async {
     emit(LoginLoadingState());
+        log("cubit email $email password $password");
+
     final response =
         await authRepository.signIn(email: email, password: password);
     response.fold((errMessage) {
       emit(LoginErrorState(errMessage: errMessage));
     }, (uid) {
-      emit(LoginSuccessState(uid: uid));
+      if(!isClosed) {
+        emit(LoginSuccessState(uid: uid));
+      }
     });
   }
 
@@ -62,10 +68,11 @@ class AuthCubit extends Cubit<AuthState> {
       lastName: lastName,
     );
     response.fold(
-      (errMessage) => emit(RegisterErrorState(errMessage: errMessage)),
+      (errMessage){if(!isClosed) { emit(RegisterErrorState(errMessage: errMessage));}},
       (r) {
-        print('user dataaaa_---${userModel?.firstName}');
-        emit(RegisterSuccessState(uid: uid));
+
+        if(!isClosed) {
+        emit(RegisterSuccessState(uid: uid));}
       },
     );
   }
@@ -74,7 +81,10 @@ class AuthCubit extends Cubit<AuthState> {
     emit(GetUserDataLoadingState());
     final response = await authRepository.getUserProfile(uid: uid);
     response.fold(
-        (errMessage) => emit(GetUserDataErrorState(errMessage: errMessage)),
-        (userData) => emit(GetUserDataSuccessState(userData: userData)));
+        (errMessage){
+          if(!isClosed) {
+            emit(GetUserDataErrorState(errMessage: errMessage));
+          }},
+        (userData){if(!isClosed) { emit(GetUserDataSuccessState(userData: userData));}});
   }
 }

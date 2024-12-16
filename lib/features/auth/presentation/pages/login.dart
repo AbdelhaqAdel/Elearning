@@ -26,11 +26,11 @@ class Login extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 backgroundColor: Colors.green,
-                content: Text("Login success"),
+                content: Text("Login successfully"),
               ),
             );
-            AuthCubit.get(context).getUserData(uid: state.uid);
-            Navigator.push(
+            // AuthCubit.get(context).getUserData(uid: state.uid);
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const HomeScreen()),
             );
@@ -81,8 +81,9 @@ class Login extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 40),
-                        const TextField(
-                          decoration: InputDecoration(
+                         TextField(
+                          controller: emailController,
+                          decoration:const InputDecoration(
                             labelText: 'Email',
                             border: OutlineInputBorder(),
                             filled: true,
@@ -90,9 +91,10 @@ class Login extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const TextField(
+                         TextField(
+                          controller: passwordController,
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration:const InputDecoration(
                             labelText: 'Password',
                             border: OutlineInputBorder(),
                             filled: true,
