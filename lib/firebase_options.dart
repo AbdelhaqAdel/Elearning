@@ -41,48 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBEK2jYPmstsBB86uKmXdAMrybHCZ7U1g8',
-    appId: '1:272989202295:web:8d7963888015c8041ba372',
-    messagingSenderId: '272989202295',
-    projectId: 'elearning-74200',
-    authDomain: 'elearning-74200.firebaseapp.com',
-    storageBucket: 'elearning-74200.firebasestorage.app',
-    measurementId: 'G-0SVGXRH2QJ',
+    apiKey: 'AIzaSyDTvskbWXPcDO9RtyfNLBl8YKPT8rKrrlY',
+    appId: '1:373074661731:web:cf9cac8b95a7fe91174356',
+    messagingSenderId: '373074661731',
+    projectId: 'elearning-6c0ee',
+    authDomain: 'elearning-6c0ee.firebaseapp.com',
+    storageBucket: 'elearning-6c0ee.firebasestorage.app',
+    measurementId: 'G-WYQ4CRFDH3',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCh52R4B9lkhYJmrD9nr1ozwCCWRW9mNOE',
-    appId: '1:272989202295:android:3addbad7e1d63fad1ba372',
-    messagingSenderId: '272989202295',
-    projectId: 'elearning-74200',
-    storageBucket: 'elearning-74200.firebasestorage.app',
+    apiKey: 'AIzaSyCI7UI6OscxJRN7Wx_pj0kjz9nl1gOVDME',
+    appId: '1:373074661731:android:511c9af0cc44db19174356',
+    messagingSenderId: '373074661731',
+    projectId: 'elearning-6c0ee',
+    storageBucket: 'elearning-6c0ee.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyByYMKWurC1vzotBjpCsEkKWrqocZCCtjg',
-    appId: '1:272989202295:ios:03f449fb119d2b6e1ba372',
-    messagingSenderId: '272989202295',
-    projectId: 'elearning-74200',
-    storageBucket: 'elearning-74200.firebasestorage.app',
+    apiKey: 'AIzaSyB3IV2jwvBKUPm8VWtT4KrF5_7RwD5lQcc',
+    appId: '1:373074661731:ios:703577dcc1446fb4174356',
+    messagingSenderId: '373074661731',
+    projectId: 'elearning-6c0ee',
+    storageBucket: 'elearning-6c0ee.firebasestorage.app',
     iosBundleId: 'com.example.flutterApplication3',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyByYMKWurC1vzotBjpCsEkKWrqocZCCtjg',
-    appId: '1:272989202295:ios:03f449fb119d2b6e1ba372',
-    messagingSenderId: '272989202295',
-    projectId: 'elearning-74200',
-    storageBucket: 'elearning-74200.firebasestorage.app',
+    apiKey: 'AIzaSyB3IV2jwvBKUPm8VWtT4KrF5_7RwD5lQcc',
+    appId: '1:373074661731:ios:703577dcc1446fb4174356',
+    messagingSenderId: '373074661731',
+    projectId: 'elearning-6c0ee',
+    storageBucket: 'elearning-6c0ee.firebasestorage.app',
     iosBundleId: 'com.example.flutterApplication3',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBEK2jYPmstsBB86uKmXdAMrybHCZ7U1g8',
-    appId: '1:272989202295:web:c6d5068e6a0c559b1ba372',
-    messagingSenderId: '272989202295',
-    projectId: 'elearning-74200',
-    authDomain: 'elearning-74200.firebaseapp.com',
-    storageBucket: 'elearning-74200.firebasestorage.app',
-    measurementId: 'G-DYYWK4E9PN',
+    apiKey: 'AIzaSyDTvskbWXPcDO9RtyfNLBl8YKPT8rKrrlY',
+    appId: '1:373074661731:web:0bfbebb296d9d745174356',
+    messagingSenderId: '373074661731',
+    projectId: 'elearning-6c0ee',
+    authDomain: 'elearning-6c0ee.firebaseapp.com',
+    storageBucket: 'elearning-6c0ee.firebasestorage.app',
+    measurementId: 'G-JDGJN18JJ1',
   );
+
 }
