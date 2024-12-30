@@ -17,4 +17,6 @@ abstract class IAuthRepo {
   });
 
   Future<Either<String, RegisterModel>> getUserProfile({required String uid});
+  Future<Either<String, void>> signInWithGoogle();
+   Future<Either<String, void>> signOutWithGoogle();
 }

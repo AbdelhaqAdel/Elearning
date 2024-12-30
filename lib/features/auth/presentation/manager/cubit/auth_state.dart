@@ -35,3 +35,25 @@ class GetUserDataErrorState extends AuthState {
    final String errMessage;
   GetUserDataErrorState({required this.errMessage});
 }
+
+
+
+class LoginWithGoogleLoadingState extends AuthState {}
+class LoginWithGoogleSuccessState extends AuthState {
+
+  LoginWithGoogleSuccessState();
+}
+class LoginWithGoogleErrorState extends AuthState {
+  LoginWithGoogleErrorState();
+}
+
+class LogOutWithGoogleLoadingState extends AuthState {}
+class LogOutWithGoogleSuccessState extends AuthState {
+
+  LogOutWithGoogleSuccessState();
+}
+class LogOutWithGoogleErrorState extends AuthState {
+  LogOutWithGoogleErrorState();
+}
+
+

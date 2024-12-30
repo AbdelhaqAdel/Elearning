@@ -37,7 +37,7 @@ class Resgister extends StatelessWidget {
             // AuthCubit.get(context).getUserData(uid: state.uid);
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              MaterialPageRoute(builder: (context) =>  HomeScreen(cubitContext: context,)),
             );
           } else if (state is LoginErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(

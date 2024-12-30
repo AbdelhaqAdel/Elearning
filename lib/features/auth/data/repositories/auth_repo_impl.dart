@@ -66,4 +66,27 @@ class AuthRepository implements IAuthRepo {
       return left(e.toString());
     }
   }
+
+    @override
+  Future<Either<String, void>> signInWithGoogle() async {
+    try {
+      
+      await remoteDataSource.signInWithGoogle();
+      return right(null);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
+
+  
+    @override
+  Future<Either<String, void>> signOutWithGoogle() async {
+    try {
+      
+      await remoteDataSource.googleSignOut();
+      return right(null);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_application_3/features/auth/presentation/widgets/signup1
 import 'package:flutter_application_3/features/home/presentation/screen/home_screen.dart';
 import 'package:flutter_application_3/sigunp1.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Login extends StatelessWidget {
   final GlobalKey<FormState> signInFormKey = GlobalKey();
@@ -21,21 +22,20 @@ class Login extends StatelessWidget {
         authRepository: getIt.get<AuthRepository>(),
       ),
       child: BlocConsumer<AuthCubit, AuthState>(
-        listener: (context, state) {
-          if (state is LoginSuccessState) {
-            ScaffoldMessenger.of(context).showSnackBar(
+        listener: (cubitContext, state) {
+          if (state is LoginSuccessState||state is LoginWithGoogleSuccessState) {
+            ScaffoldMessenger.of(cubitContext).showSnackBar(
               const SnackBar(
                 backgroundColor: Colors.green,
                 content: Text("Login successfully"),
               ),
             );
-            // AuthCubit.get(context).getUserData(uid: state.uid);
             Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              cubitContext,
+              MaterialPageRoute(builder: (context) =>  HomeScreen(cubitContext: cubitContext,)),
             );
           } else if (state is LoginErrorState) {
-            ScaffoldMessenger.of(context).showSnackBar(
+            ScaffoldMessenger.of(cubitContext).showSnackBar(
               SnackBar(
                 backgroundColor: Colors.red,
                 content: Text(state.errMessage.toString()),
@@ -178,6 +178,14 @@ class Login extends StatelessWidget {
                                   .facebook), // يمكنك استخدام أي أيقونة مناسبة
                               onPressed: () {
                                 // هنا يمكنك إضافة الإجراء المطلوب عند الضغط على زر "Facebook"
+                              },
+                            ),
+                              const SizedBox(width: 20),
+                            IconButton(
+                              icon: const FaIcon(FontAwesomeIcons.google),// يمكنك استخدام أي أيقونة مناسبة
+                              onPressed: () async{
+                                   await AuthCubit.get(context).signInWithGoogle(
+                              );
                               },
                             ),
                           ],
